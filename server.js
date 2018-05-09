@@ -13,6 +13,11 @@ app.use(bodyParser.urlencoded({
     extended:false
 }))
 
+app.use('/graphql',expressGraphQL({
+    schema,
+    graphiql:true
+}))
+
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'))
 
@@ -23,10 +28,7 @@ if(process.env.NODE_ENV === 'production'){
 }
 const PUERTO = process.env.PORT || 4000
 
-app.use('/graphql',expressGraphQL({
-    schema,
-    graphiql:true
-}))
+
 
 app.listen(PUERTO,()=>{
     console.log("servidor de pruebas iniciado en 4000")
