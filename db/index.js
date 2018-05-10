@@ -8,7 +8,6 @@ mongoose.Promise = global.Promise
 mongoose.connect(keys.MONGODB_URI).then(
     ()=>{
         console.log('Conexion exitosa a mongodb')
-        const count = 
         User.count({},(err,count)=>{
             if(err) return console.log(err.message)
             if(count>0){
