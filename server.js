@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended:false
 }))
-
+require('./db')
 app.use('/graphql',expressGraphQL({
     schema,
     graphiql:true
