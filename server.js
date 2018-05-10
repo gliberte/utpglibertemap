@@ -6,6 +6,8 @@ import keys from './config/keys'
 import expressGraphQL from 'express-graphql'
 import schema from './graphqlSchema/schema'
 
+require('./passport/passport')
+
 const app = express()
 
 app.use(bodyParser.json())
@@ -13,6 +15,16 @@ app.use(bodyParser.urlencoded({
     extended:false
 }))
 require('./db')
+
+app.use(
+    cookieSession({
+        maxAge:30*24*60*60*1000,
+        keys:[keys.cookieKey]
+    })
+)
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use('/graphql',expressGraphQL({
     schema,
     graphiql:true
