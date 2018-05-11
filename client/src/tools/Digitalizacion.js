@@ -6,6 +6,7 @@ import {
     Toolbar
   } from '@terrestris/react-geo'
 
+
 const finalizarDibujo = evt =>{
     console.log(evt.feature.getGeometry())
 }
@@ -26,7 +27,8 @@ export default ({map}) =>(
     <Container>
           
           <ToggleGroup orientation="vertical">
-            <DigitizeButton
+        
+          <DigitizeButton
               name="drawPoint"
               map={map}
               drawType="Point"
@@ -34,7 +36,8 @@ export default ({map}) =>(
             >
               <i className="fa fa-map-marker"></i>
             </DigitizeButton>
-
+         
+            
             <DigitizeButton
               name="drawLine"
               map={map}
@@ -42,7 +45,8 @@ export default ({map}) =>(
             >
               <i className="fa fa-minus"></i>
             </DigitizeButton>
-
+  
+        
             <DigitizeButton
               name="drawPolygon"
               map={map}
