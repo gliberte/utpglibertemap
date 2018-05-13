@@ -10,10 +10,21 @@ export const crearNuevoPunto = (data,user)=>{
             type:"Point",
             coordinates
         },
-        user:user._id,
+        userid:user._id,
         empresa:user.empresa
 
     })
     return nuevopunto.save()
 
+}
+
+export const obtenerTodosLosPuntos = ()=>{
+    return Punto.find()
+}
+
+export const obtenerPutosUsuarioActual = userid =>{
+    return Punto.find({user:userid})
+}
+export const obtenerPuntosPorEmpresaActual = empresa =>{
+    return Punto.find({empresa:empresa})
 }

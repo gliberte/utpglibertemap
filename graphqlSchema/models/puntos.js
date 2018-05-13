@@ -1,4 +1,7 @@
 import UserType from './user'
+
+import * as UserLoaders from '../../db/dataloaders/users'
+
 import {
     GraphQLObjectType,
     GraphQLID,
@@ -24,8 +27,14 @@ const PuntoType = new GraphQLObjectType({
         id:{type:GraphQLID},
         identificador: { type: GraphQLString },
         descripcion: { type: GraphQLString },
-        user: { 
+        userid: { 
             type: GraphQLID
+         },
+         user:{
+             type:UserType,
+             resolve(parent,args){
+                return UserLoaders.getUserById(parent.userid)
+             }
          },
          empresa:{type:GraphQLString},
         geom: {

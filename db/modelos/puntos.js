@@ -12,7 +12,7 @@ const puntoSchema = mongoose.Schema({
         type:String,
         trim:true
     },
-    user:{
+    userid:{
         type:mongoose.Schema.Types.ObjectId
     },
     empresa:{type:String},

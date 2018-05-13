@@ -17,7 +17,7 @@ mongoose.connect(keys.MONGODB_URI).then(
                     username:"gliberte",
                     nombre:"Luis Solano",
                     email:"luis.solano.l@gmail.com",
-                    role:"admin",
+                    role:"superadmin",
                     empresa:'admin'
                 })
                 ApiUser.registerUser(adminUser,'fireandice')

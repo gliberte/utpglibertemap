@@ -43,3 +43,7 @@ export const logout = ({req})=>{
 export const getUsers = ()=>{
     return User.find()
 }
+
+export const getUserById = userid =>{
+    return User.findById(userid)
+}
