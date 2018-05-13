@@ -1,9 +1,13 @@
 
 import UserType from './models/user'
+import PuntoType from './models/puntos'
 import * as ApiUsers from '../db/dataloaders/users'
+import * as ApiPuntos from '../db/dataloaders/puntos'
 import {
     GraphQLObjectType,
-    GraphQLString
+    GraphQLString,
+    GraphQLList,
+    GraphQLFloat
 } from 'graphql'
 
 const Mutation = new GraphQLObjectType({
@@ -48,6 +52,24 @@ const Mutation = new GraphQLObjectType({
             type:UserType,
             resolve(parent,args,req){
                 return ApiUsers.logout({req})
+            }
+        },
+        crearNuevoPunto:{
+            type:PuntoType,
+            args:{
+                identificador:{type:GraphQLString},
+                descripcion:{type:GraphQLString},
+                coordinates:{
+                    type:new GraphQLList(GraphQLFloat)
+                }
+            },
+            resolve(parent,args,req){
+                if(req.user){
+                    return ApiPuntos.crearNuevoPunto(args,req.user)
+                }else{
+                    throw new Error('No Autorizado')
+                }
+                
             }
         }
     }
