@@ -7,6 +7,7 @@ import Digitalizacion from './componentes/Digitalizacion'
 import Encabezado from './componentes/Encabezado'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import LayerPuntos from './componentes/mapa/LayerPuntos'
 
 
 const Map = ReactMapBoxGl({
@@ -39,6 +40,9 @@ class App extends Component {
         super(props)
 
     }
+    onStyleLoad = (map,evt)=>{
+        
+    }
 
     render() {
 
@@ -55,10 +59,12 @@ class App extends Component {
                                 style="mapbox://styles/gliberte/cjh7swe3q691j2st90bl8mmvp"
                                 center={[-79.504571, 9.034881]}
                                 zoom={[8]}
+                                onStyleLoad={this.onStyleLoad}
                             >
                                 <Digitalizacion
 
                                 />
+                                <LayerPuntos/>
                             </Mapa>
                         </Container>
 

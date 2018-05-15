@@ -12,3 +12,21 @@ export const GET_USER = gql`
         }
     }
 `
+
+export const GET_PUNTOS_POR_EMPRESA =  gql`
+    {
+        puntosEmpresaActual{
+            id
+            identificador
+            descripcion
+            geom{
+                type
+                coordinates
+            }
+            user{
+                id
+                nombre
+            }
+        }
+    }
+`
