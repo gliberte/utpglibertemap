@@ -85,8 +85,6 @@ class App extends Component {
           <LayerTree map={this.map} />
         </ContainerLayerTree>
 
-
-
       </Container>
     );
   }
