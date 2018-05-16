@@ -6,8 +6,12 @@ import ReactMapBoxGl from 'react-mapbox-gl'
 import Digitalizacion from './componentes/Digitalizacion'
 import Encabezado from './componentes/Encabezado'
 import { Query } from 'react-apollo'
+
 import gql from 'graphql-tag'
 import LayerPuntos from './componentes/mapa/LayerPuntos'
+import BarraHerramientas from './tools/BarraHerramientas'
+import InfoW from './componentes/mapa/InfoW'
+import LayerResalto from './componentes/mapa/LayerResalto'
 
 
 const Map = ReactMapBoxGl({
@@ -36,13 +40,47 @@ const GET_USER = gql`
 `
 
 class App extends Component {
+    
     constructor(props) {
         super(props)
+        this.state = {
+            map:null,
+            evtclickfeature:null,
+            zoom:8,
+            center:[-79.504571, 9.034881]
+        }
 
     }
     onStyleLoad = (map,evt)=>{
-        
+        this.setState({
+            map
+        })
     }
+    onClickPunto = (evt) =>{
+        //console.log(evt.map.queryRenderedFeatures([evt.point.x,evt.point.y],{layers:['puntos_empresa']}))
+        this.setState({evtclickfeature:evt})
+    }
+    onZoomEnd = (map,evt) =>{
+
+        const {lng,lat} = map.getCenter()
+        this.setState({
+            zoom:map.getZoom(),
+            center:[lng,lat]
+        })
+    }
+    onClick = (map,evt)=>{
+        
+        const {x,y} = evt.point
+        const ArrayElementosClickeados = map.queryRenderedFeatures([x,y],{
+            layers:['puntos_empresa']
+        })
+        if(ArrayElementosClickeados.length === 0){
+            this.setState({
+                evtclickfeature:null
+            })
+        }
+    }
+   
 
     render() {
 
@@ -55,16 +93,22 @@ class App extends Component {
 
                         <Container>
                             <Encabezado user={data ? data.user : null}/>
+                            <BarraHerramientas map={this.state.map}/>
                             <Mapa
-                                style="mapbox://styles/gliberte/cjh7swe3q691j2st90bl8mmvp"
-                                center={[-79.504571, 9.034881]}
-                                zoom={[8]}
+                                //style="mapbox://styles/gliberte/cjh7swe3q691j2st90bl8mmvp"
+                                style="mapbox://styles/mapbox/streets-v9"
+                                center={this.state.center}
+                                zoom={[this.state.zoom]}
                                 onStyleLoad={this.onStyleLoad}
+                                onZoomEnd={this.onZoomEnd}
+                                onClick={this.onClick}
+                                
                             >
-                                <Digitalizacion
-
-                                />
-                                <LayerPuntos/>
+                                <Digitalizacion/>
+                                <LayerResalto feature={this.state.evtclickfeature ? this.state.evtclickfeature.feature : null}/>
+                                <LayerPuntos onClickPunto={this.onClickPunto}/>
+                                
+                                <InfoW evtclickfeature={this.state.evtclickfeature}/>
                             </Mapa>
                         </Container>
 
