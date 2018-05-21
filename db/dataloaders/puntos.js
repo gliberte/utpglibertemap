@@ -2,7 +2,7 @@ import Punto from '../modelos/puntos'
 import User from '../modelos/users'
 
 export const crearNuevoPunto = (data,user)=>{
-    const {identificador,descripcion,coordinates} = data
+    const {identificador,descripcion,coordinates,timestamp} = data
     const nuevopunto = new Punto({
         identificador,
         descripcion,
@@ -11,7 +11,8 @@ export const crearNuevoPunto = (data,user)=>{
             coordinates
         },
         userid:user._id,
-        empresa:user.empresa
+        empresa:user.empresa,
+        timestamp
 
     })
     return nuevopunto.save()

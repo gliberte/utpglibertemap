@@ -8,7 +8,6 @@ import {
     GraphQLString,
     GraphQLList,
     GraphQLFloat
-
 } from 'graphql'
 
 const GeoJsonPunto = new GraphQLObjectType({
@@ -39,7 +38,8 @@ const PuntoType = new GraphQLObjectType({
          empresa:{type:GraphQLString},
         geom: {
             type:GeoJsonPunto
-        }
+        },
+        timestamp:{type:GraphQLString}
     }
 })
 

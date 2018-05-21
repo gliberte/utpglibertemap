@@ -16,7 +16,8 @@ const puntoSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId
     },
     empresa:{type:String},
-    geom:mongoose.Schema.Types.Point
+    geom:mongoose.Schema.Types.Point,
+    timestamp:{type:String}
 })
 
 export default mongoose.model('Puntos',puntoSchema)

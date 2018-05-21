@@ -61,7 +61,8 @@ const Mutation = new GraphQLObjectType({
                 descripcion:{type:GraphQLString},
                 coordinates:{
                     type:new GraphQLList(GraphQLFloat)
-                }
+                },
+                timestamp:{type:GraphQLString}
             },
             resolve(parent,args,req){
                 if(req.user){
