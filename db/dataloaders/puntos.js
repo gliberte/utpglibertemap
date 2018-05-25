@@ -24,7 +24,7 @@ export const obtenerTodosLosPuntos = ()=>{
 }
 
 export const obtenerPutosUsuarioActual = userid =>{
-    return Punto.find({user:userid})
+    return Punto.find({userid:userid})
 }
 export const obtenerPuntosPorEmpresaActual = empresa =>{
     return Punto.find({empresa:empresa})
