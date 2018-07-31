@@ -17,6 +17,7 @@ export const registerUser =  (userData,password)=>{
         })
     })
 }
+
 export const login =  ({email,password,req})=>{
     return new Promise((resolve,reject)=>{
         passport.authenticate('local',(err,user,info)=>{
@@ -29,9 +30,10 @@ export const login =  ({email,password,req})=>{
                 resolve(user)
             })
         })({body:{email,password}})
-    })
-    
+    })  
 }
+
+
 export const logout = ({req})=>{
     return new Promise((resolve,reject)=>{
         const {user}=req
